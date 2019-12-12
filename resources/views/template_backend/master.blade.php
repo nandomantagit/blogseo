@@ -8,6 +8,7 @@
   <!-- General CSS Files -->
   <link rel="stylesheet" href="{{asset('public/assets/modules/bootstrap/css/bootstrap.min.css')}}">
   <link rel="stylesheet" href="{{asset('public/assets/modules/fontawesome/css/all.min.css')}}">
+  <link rel="stylesheet" href="{{asset('public/assets/modules/select2/dist/css/select2.min.css')}}">
 
   <!-- CSS Libraries -->
 
@@ -49,9 +50,14 @@
                 <i class="far fa-user"></i> Profile
               </a>
               <div class="dropdown-divider"></div>
-              <a href="#" class="dropdown-item has-icon text-danger">
+              <a class="dropdown-item has-icon text-danger" href="{{ route('logout') }}"
+                  onclick="event.preventDefault();
+                                document.getElementById('logout-form').submit();">
                 <i class="fas fa-sign-out-alt"></i> Logout
               </a>
+               <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                     @csrf
+               </form>
             </div>
           </li>
         </ul>
