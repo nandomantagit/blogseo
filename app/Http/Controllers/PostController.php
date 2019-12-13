@@ -7,6 +7,7 @@ use Illuminate\Support\Str;
 use App\Posts;
 use App\Tags;
 use App\Category;
+use Auth;
 
 class PostController extends Controller
 {
@@ -57,6 +58,7 @@ class PostController extends Controller
             'content' => $request->content,
             'gambar' => 'puclic/uploads/posts/'.$new_gambar,
             'slug' => Str::slug($request->judul),
+            'users_id' => Auth::id(),
         ]);
 
         //menambahkan tags ke database pada table posts_tags
