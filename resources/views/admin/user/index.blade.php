@@ -1,7 +1,5 @@
 @extends('template_backend.master')
 @section('sub-judul','User')
-
-
 @section('content')
 
 	@if(Session::has('success'))

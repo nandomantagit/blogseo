@@ -22,7 +22,7 @@ class PostController extends Controller
         return view('admin.post.index', compact('post'));
     }
 
-    /**
+    /**s
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
@@ -56,7 +56,7 @@ class PostController extends Controller
             'judul' => $request->judul,
             'category_id' => $request->category_id,
             'content' => $request->content,
-            'gambar' => 'puclic/uploads/posts/'.$new_gambar,
+            'gambar' => 'public/uploads/posts/'.$new_gambar,
             'slug' => Str::slug($request->judul),
             'users_id' => Auth::id(),
         ]);
@@ -64,7 +64,7 @@ class PostController extends Controller
         //menambahkan tags ke database pada table posts_tags
         $post->tags()->attach($request->tags);
 
-        $gambar->move('puclic/uploads/posts/', $new_gambar);
+        $gambar->move('public/uploads/posts/', $new_gambar);
 
         return redirect()->back()->with('success', 'Postingan anda berhasil disimpan!');
     }
@@ -114,17 +114,17 @@ class PostController extends Controller
         if($request->has('gambar')) {
             $gambar = $request->gambar;
             $new_gambar = time().$gambar->getClientOriginalName();
-            $gambar->move('puclic/uploads/posts/', $new_gambar);
+            $gambar->move('public/uploads/posts/', $new_gambar);
 
-             $post_data = [
+        $post_data = [
             'judul' => $request->judul,
             'category_id' => $request->category_id,
             'content' => $request->content,
-            'gambar' => 'puclic/uploads/posts/'.$new_gambar,
+            'gambar' => 'public/uploads/posts/'.$new_gambar,
             'slug' => Str::slug($request->judul),
         ];
         }else{
-            $post_data = [
+        $post_data = [
             'judul' => $request->judul,
             'category_id' => $request->category_id,
             'content' => $request->content,
@@ -134,6 +134,7 @@ class PostController extends Controller
 
         //menambahkan tags ke database pada table posts_tags
         $post->tags()->sync($request->tags);
+        $post->update($post_data);
 
         return redirect()->back()->with('success', 'Postingan anda berhasil disimpan!');
     }
@@ -170,8 +171,10 @@ class PostController extends Controller
     public function kill($id)
     {
         $post = Posts::withTrashed()->where('id', $id)->first();
+        $post->tags()->detach();
         $post->forceDelete();
 
         return redirect()->back()->with('success','Post Berhasil di hapus secara permanen !');
     }
 }
+    
