@@ -1,5 +1,5 @@
 @extends('template_blog.content')
-
+@section('title','List Posts')
 @section('isi')
 
 	@foreach($data as $list_post)
@@ -8,7 +8,7 @@
 			<a class="post-img" href="{{route('blog.isi',$list_post->slug)}}"><img src="{{asset($list_post->gambar)}}" alt=""></a>
 			<div class="post-body">
 				<div class="post-category">
-					<a href="category.html">{{$list_post->category->name}}</a>
+					<a href="{{ route('blog.category', $list_post->category->slug) }}">{{$list_post->category->name}}</a>
 				</div>
 				<h3 class="post-title"><a href="{{route('blog.isi',$list_post->slug)}}">{{$list_post->judul}}</a></h3>
 				<ul class="post-meta">

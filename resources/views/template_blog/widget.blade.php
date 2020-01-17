@@ -34,13 +34,13 @@
 		<div class="section-title">
 			<h2 class="title">Categories</h2>
 		</div>
-		@foreach($category as $catwid)
 		<div class="category-widget">
 			<ul>
-				<li><a href="#">{{$catwid->name}} <span>{{$catwid->posts->count()}}</span></a></li>
+				@foreach($category_widget as $catwid)
+				<li><a href="{{ route('blog.category', $catwid->slug) }}">{{$catwid->name}} <span>{{$catwid->posts->count()}}</span></a></li>
+				@endforeach
 			</ul>
 		</div>
-		@endforeach
 	</div>
 	<!-- /category widget -->
 

@@ -21,10 +21,10 @@
 			<div class="col-md-3">
 				<div class="footer-widget">
 					<h3 class="footer-title">Categories</h3>
-					@foreach($category as $catfooter)
+					@foreach($category_widget as $catfooter)
 					<div class="category-widget">
 						<ul>
-							<li><a href="#"> {{$catfooter->name}} <span>{{$catfooter->posts->count()}}</span></a></li>
+							<li><a href="{{ route('blog.category', $catfooter->slug) }}"> {{$catfooter->name}} <span>{{$catfooter->posts->count()}}</span></a></li>
 						</ul>
 					</div>
 					@endforeach
@@ -33,14 +33,13 @@
 			<div class="col-md-3">
 				<div class="footer-widget">
 					<h3 class="footer-title">Tags</h3>
-					
+					@foreach($tags_widget as $tagwid)
 					<div class="tags-widget">
 						<ul>
-							<li><a href="#">TAGS NAME1</a></li>
-							<li><a href="#">TAGS NAME2</a></li>
+							<li><a href="#"> {{$tagwid->name}} </a></li>
 						</ul>
 					</div>
-
+					@endforeach
 				</div>
 			</div>
 			<div class="col-md-3">

@@ -7,7 +7,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
-	<title>Callie HTML Template</title>
+	<title>@yield('title')</title>
 
 	<!-- Google font -->
 	<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700%7CMuli:400,700" rel="stylesheet">
@@ -55,16 +55,16 @@
 
 						<!-- search & aside toggle -->
 						<div class="nav-btns">
-							<button class="aside-btn"><i class="fa fa-bars"></i></button>
 							<button class="search-btn"><i class="fa fa-search"></i></button>
 							<div id="nav-search">
-								<form>
-									<input class="input" name="search" placeholder="Enter your search...">
+								<form action="{{ route('blog.cari') }}" method="get">
+									<input class="input" name="cari" placeholder="Enter your search...">
 								</form>
 								<button class="nav-close search-close">
 									<span></span>
 								</button>
 							</div>
+							<button class="aside-btn"><i class="fa fa-bars"></i></button>
 						</div>
 						<!-- /search & aside toggle -->
 					</div>
@@ -78,22 +78,21 @@
 						<ul class="nav-menu">
 							<li><a href="{{url('')}}">Home</a></li>
 							<li class="has-dropdown">
-								<a href="index.html">Categories</a>
+								<a href="#">Categories</a>
 								<div class="dropdown">
 									<div class="dropdown-body">
 										<ul class="dropdown-list">
-											@foreach($category as $cathead)
-											<li><a href="category.html">{{$cathead->name}}</a></li>
+											@foreach($category_widget as $cathead)
+											<li><a href="{{ route('blog.category', $cathead->slug) }}">{{$cathead->name}}</a></li>
 											@endforeach
 										</ul>
 									</div>
 								</div>
 							</li>
 							<li><a href="{{route('blog.list')}}">List Post</a></li>
-							<li><a href="#">Music</a></li>
-							<li><a href="#">Film</a></li>
-							<li><a href="#">Games</a></li>
-							<li><a href="#">News</a></li>
+							<li><a href="#">About Us</a></li>
+							<li><a href="#">Contact</a></li>
+							<li><a href="#">Advertise</a></li>
 
 						</ul>
 						<!-- /nav -->
@@ -104,11 +103,12 @@
 				<!-- Aside Nav -->
 				<div id="nav-aside">
 					<ul class="nav-aside-menu">
-						<li><a href="index.html">Home</a></li>
+						<li><a href="{{url('/login')}}">Login</a></li>
+						<li><a href="{{url('')}}">Home</a></li>
 						<li class="has-dropdown"><a>Categories</a>
-							@foreach($category as $cat)
+							@foreach($category_widget as $cat)
 							<ul class="dropdown">
-								<li><a href="#">{{$cat->name}}</a></li>
+								<li><a href="{{ route('blog.category', $cat->slug) }}">{{$cat->name}}</a></li>
 							</ul>
 							@endforeach
 						</li>

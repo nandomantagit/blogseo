@@ -1,4 +1,5 @@
 @include('template_blog.header')
+
 @yield('isi1')
 <!-- SECTION -->
 <div class="section">

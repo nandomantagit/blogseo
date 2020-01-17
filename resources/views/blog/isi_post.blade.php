@@ -1,6 +1,8 @@
 @extends('template_blog.content')
+@section('title','Isi Posts')
 
 @foreach($data as $isi_post)
+
 
 	@section('isi1')
 		<div id="post-header" class="page-header">
@@ -9,7 +11,7 @@
 				<div class="row">
 					<div class="col-md-10">
 						<div class="post-category">
-							<a href="category.html">{{$isi_post->category->name}}</a>
+							<a href="{{ route('blog.category', $isi_post->category->slug) }}">{{$isi_post->category->name}}</a>
 						</div>
 						<h1>{{$isi_post->judul}}</h1>
 						<ul class="post-meta">

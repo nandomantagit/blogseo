@@ -1,4 +1,5 @@
 @extends('template_blog.content')
+@section('title','Home')
 @section('isi1')
 <!-- SECTION -->
 <div class="section">
@@ -79,9 +80,9 @@
 							<a class="post-img" href="{{route('blog.isi', $post_terbaru->slug)}}"><img src="{{ $post_terbaru->gambar }}" alt="" style="height: 200px"></a>
 							<div class="post-body">
 								<div class="post-category">
-									<a href="#">{{$post_terbaru->category->name}}</a>
+									<a href="{{ route('blog.category', $post_terbaru->category->slug) }}">{{$post_terbaru->category->name}}</a>
 								</div>
-								<h3 class="post-title"><a href="#">{{$post_terbaru->judul}}</a></h3>
+								<h3 class="post-title"><a href="{{route('blog.isi',$post_terbaru->slug)}}">{{$post_terbaru->judul}}</a></h3>
 								<ul class="post-meta">
 									<li><a href="author.html">{{$post_terbaru->users->name}}</a></li>
 									<li>{{$post_terbaru->created_at->diffForHumans()}}</li>
